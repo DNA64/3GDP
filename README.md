@@ -1,5 +1,5 @@
 
-*These files are being provided today as part of an effort on my part to archive and share projects I've worked on over the years. - Enjoy*
+*These files are being provided today "As-Is" as part of an effort on my part to archive and share projects I've worked on over the years.* **USE WITH CAUTION AND AT YOUR OWN RISK!**
 
 # 3GDP
 **iPhone 3G Baseband Downgrader Pro v1.3.5 for BB 02.30.03 by DNA64**
