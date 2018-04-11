@@ -10,7 +10,7 @@
 
 ## About
 
-After testing phasebanddowngrader by pH and not having any success I decided to skip using his script and start fresh using the GeoHotz method, the end results were success! I have therefore decided to write my own script, as I felt pH left out some very important features from his. I also tried "DownBB" with no success, and felt that there was not enough documentation for any of these tools. Comments by several users that tried and failed seemed to support my theory.
+After testing phasebanddowngrader by pH and not having any success I decided to skip using his script and start fresh using the GeoHotz bspatch method which I applied to the ICE2_02.28.00.fls file, the end results were success! I have therefore decided to write my own script, as I felt pH left out some very important features from his. I also tried "DownBB" with no success, and felt that there was not enough documentation for any of these tools. Comments by several users that tried and failed seemed to support my theory.
 
 ## Instructions
 
