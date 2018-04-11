@@ -36,7 +36,7 @@ yellowsn0w was created by members of the iPhone Dev Team.
 The unofficial version 0.98 is included with these tools,
 but is not supported by the team and is provided as is.
 
-And finally thanks to "Nik S Denin - wolf.step@gmail.com" for his Serial Number Output Script.
+And finally thanks to "Nik S Denin" for his Serial Number Output Script.
 
 ## Support
 
