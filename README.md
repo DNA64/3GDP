@@ -4,7 +4,7 @@
 **USE WITH CAUTION AND AT YOUR OWN RISK!**
 
 # 3GDP
-**iPhone 3G Baseband Downgrader Pro v1.3.5 for BB 02.30.03 by DNA64**
+**iPhone 3G Baseband Downgrader Pro v1.3.5 for BB 02.30.03 by DNA64 (aka ATTNCK)**
 
 *04/15/2009*
 
