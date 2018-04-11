@@ -1,0 +1,39 @@
+#3G Downgrader Pro v1.3.5 for BB 02.30.03
+#Copyright (c) 2009 DNA64
+#twitter.com/DNA64
+
+#Permission is hereby granted, free of charge, to any person obtaining a copy
+#of this software and associated documentation files (the "Software"), to deal
+#in the Software without restriction, including without limitation the rights
+#to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+#copies of the Software, and to permit persons to whom the Software is
+#furnished to do so, subject to the following conditions:
+
+#The above copyright notice and this permission notice shall be included in all
+#copies or substantial portions of the Software.
+
+#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+#AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+#OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+#SOFTWARE.
+
+#Thanks to GeoHot and all the iPhone Dev Team members for all their hard work, without them and GeoHot's bspatch the downgrade would not be possible.
+#yellowsn0w was created by members of the iPhone Dev Team.
+
+#3G Downgrader Pro uses a quick command line tool called "serial" to display the iPhones Serial Number,
+#special thanks to the Author: Nik S Denin from http://weho.ru for the creation of this utility.
+
+set -e
+echo "Loading yellowsn0w..."; sleep 1 
+echo "yellowsn0w was created by members"
+echo "of the iPhone Dev Team."
+echo "vist http://yellowsn0w.com for more info or"; sleep 2 
+echo ""
+exec /usr/bin/yellowsn0w
+echo "please wait while rebooting the device..."
+sleep 2
+su -c reboot
+exit

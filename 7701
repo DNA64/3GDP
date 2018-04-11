@@ -1,0 +1,84 @@
+#3G Downgrader Pro v1.3.5 for BB 02.30.03
+#Copyright (c) 2009 DNA64
+#twitter.com/DNA64
+
+#Permission is hereby granted, free of charge, to any person obtaining a copy
+#of this software and associated documentation files (the "Software"), to deal
+#in the Software without restriction, including without limitation the rights
+#to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+#copies of the Software, and to permit persons to whom the Software is
+#furnished to do so, subject to the following conditions:
+
+#The above copyright notice and this permission notice shall be included in all
+#copies or substantial portions of the Software.
+
+#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+#AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+#OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+#SOFTWARE.
+
+#Thanks to GeoHot and all the iPhone Dev Team members for all their hard work, without them and GeoHot's bspatch the downgrade would not be possible.
+#yellowsn0w was created by members of the iPhone Dev Team.
+
+#3G Downgrader Pro uses a quick command line tool called "serial" to display the iPhones Serial Number,
+#special thanks to the Author: Nik S Denin from http://weho.ru for the creation of this utility.
+
+set -e
+echo -ne '\E[0m'
+displayMenu () {
+clear
+echo -e '\E[40;31m'
+echo "If you haven't verified your bootloader"
+echo "version using option 1 from the main" 
+echo "menu, please do so now."; sleep 6
+clear
+echo -ne '\E[0m'
+echo -e '\E[37;40m'
+echo ""
+echo "Please select one of the following options:"
+echo ""
+echo "1) Return to Main Menu"
+echo "2) Continue Downgrade"
+echo "3) Quit"
+}
+while [ 1 ]
+do
+displayMenu
+read -p ? -s -n 1 CHOICE
+echo ""
+case "$CHOICE" in
+"1")
+echo "Returning to Main Menu.."; sleep 2
+clear
+chmod 755 downgrade
+sleep 1
+echo -ne '\E[0m'
+source downgrade
+;;
+"2")
+clear
+echo ""
+echo "Continuing with downgrade..."
+echo ""
+echo "Disabling CommCenter"; sleep 2
+launchctl unload /System/Library/LaunchDaemons/com.apple.CommCenter.plist
+echo "Setting Permissions"; sleep 1
+chmod 755 BBUpdaterExtreme
+chmod 755 9000
+echo "Attempting to downgrade baseband to 02.28.00" 
+./BBUpdaterExtreme update -f ICE2_02.28.00.fls -e ICE2_02.28.00.eep 
+launchctl load /System/Library/LaunchDaemons/com.apple.CommCenter.plist
+sleep 4
+clear
+source 9000
+;;
+"3")
+exit
+;;
+*) echo "\"$CHOICE\" is not a valid choice, please try again. "; sleep 2 
+;;
+esac
+done

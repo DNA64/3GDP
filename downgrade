@@ -1,0 +1,239 @@
+#!/bin/bash
+
+#3G Downgrader Pro v1.3.5 for BB 02.30.03
+#Copyright (c) 2009 DNA64
+#twitter.com/DNA64
+
+#Permission is hereby granted, free of charge, to any person obtaining a copy
+#of this software and associated documentation files (the "Software"), to deal
+#in the Software without restriction, including without limitation the rights
+#to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+#copies of the Software, and to permit persons to whom the Software is
+#furnished to do so, subject to the following conditions:
+
+#The above copyright notice and this permission notice shall be included in all
+#copies or substantial portions of the Software.
+
+#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+#AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+#OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+#SOFTWARE.
+
+#Thanks to GeoHot and all the iPhone Dev Team members for all their hard work, without them and GeoHot's bspatch the downgrade would not be possible.
+#yellowsn0w was created by members of the iPhone Dev Team.
+
+#3G Downgrader Pro uses a quick command line tool called "serial" to display the iPhones Serial Number,
+#special thanks to the Author: Nik S Denin from http://weho.ru for the creation of this utility.
+
+
+set -e
+clear
+echo "Preparing 3G Downgrader Pro..."
+echo -e '\E[32;40m'
+echo "Please enable your WiFi or Edge to continue."
+echo ""
+echo "Searching for required Internet connection.."
+echo ""
+if ping -c 1 -i 1 -q 208.67.222.222 &>/dev/null; then
+	echo "OK! - Internet Connection Found!"
+else	echo "An Internet connection may not be present,"
+        echo "this program requires files hosted online"
+        echo "and that you're connected to continue"
+        echo "without errors."
+        sleep 5
+fi
+sleep 5
+echo "Please wait, checking for required files"; sleep 1
+if [ -f "/usr/bin/wget" ]
+  then
+    echo "wget - FOUND!"
+else 
+echo "FILE NOT FOUND!"
+echo "Fetching File..."
+apt-get --allow-unauthenticated install wget
+fi
+if [ -f "7701" ]
+  then
+    echo "7701 - FOUND!"
+else 
+echo "FILE NOT FOUND!"
+echo "Fetching File..."
+wget http://dna64.net/repo/3GDP/7701
+fi
+if [ -f "9000" ]
+  then
+    echo "9000 - FOUND!"
+else 
+echo "FILE NOT FOUND!"
+echo "Fetching File..."
+wget http://dna64.net/repo/3GDP/9000
+fi
+if [ -f "/usr/bin/serial" ]
+  then
+    echo "serial - FOUND!"
+else 
+echo "FILE NOT FOUND!"
+echo "Fetching File..."
+wget http://weho.ru/iphone/deb/serial.deb
+#apt-get --allow-unauthenticated install serial
+dpkg -i serial.deb
+rm serial.*
+fi
+if [ -f "/usr/bin/yellowsn0w" ]
+  then
+    echo "yellowsn0w - FOUND!"
+else 
+echo "FILE NOT FOUND!"
+echo "Fetching File..."
+apt-get --allow-unauthenticated install yellowsn0w
+fi
+if [ -f "ICE2_02.28.00.eep" ]
+  then
+    echo "ICE2_02.28.00.eep - FOUND!"
+else 
+echo "FILE NOT FOUND!"
+echo "Fetching File..."
+wget http://dna64.net/repo/3GDP/ICE2_02.28.00.eep
+fi
+if [ -f "ICE2_02.28.00.fls" ]
+  then
+    echo "ICE2_02.28.00.fls - FOUND!"
+else 
+echo "FILE NOT FOUND!"
+echo "Fetching File..."
+wget http://dna64.net/repo/3GDP/ICE2_02.28.00.fls
+fi
+if [ -f "BBUpdaterExtreme" ]
+  then
+    echo "BBUpdaterExtreme - FOUND!"
+else 
+echo "FILE NOT FOUND!"
+echo "Fetching File..."
+wget http://dna64.net/repo/3GDP/BBUpdaterExtreme
+fi
+if [ -f "README1ST.txt" ]
+  then
+    echo "README1ST.txt - FOUND!"
+else 
+echo "FILE NOT FOUND!"
+echo "Fetching File..."
+wget http://dna64.net/repo/3GDP/README1ST.txt
+fi
+echo "Setting Permissions"; sleep 1
+chmod 755 BBUpdaterExtreme
+chmod 755 /usr/bin/serial
+chmod 755 7701
+chmod 755 9000
+clear
+echo "3G Downgrader Pro v1.3.5 for BB 02.30.03" 
+echo "Script by DNA64"
+echo ""
+sleep 2
+displayMenu () {
+echo -e '\E[37;40m'
+clear
+echo "Please select one of the following options:"
+echo ""
+echo "1) Identify Bootloader"
+echo "2) Downgrade Baseband"
+echo "3) Credits"
+echo "4) Quit"
+}
+while [ 1 ]
+do
+displayMenu
+read -p ? -s -n 1 CHOICE
+echo ""
+case "$CHOICE" in
+"1")
+clear
+echo""
+echo "Attempting to identify bootloader..."; sleep 2
+echo "Disabling CommCenter"; sleep 2
+launchctl unload /System/Library/LaunchDaemons/com.apple.CommCenter.plist
+clear
+echo "Outputting Bootloader Information"; sleep 2
+./BBUpdaterExtreme queryversion
+serial
+echo "Bootloader identified!"; sleep 20
+echo "Please wait while loading CommCenter"; sleep 2
+launchctl load /System/Library/LaunchDaemons/com.apple.CommCenter.plist
+echo "All Done! Returning to Menu.."; sleep 2
+;;
+"2")
+clear
+echo ""
+echo ""
+echo "3G Downgrader Pro v1.3.5 for BB 02.30.03" 
+echo "Script by DNA64"
+echo "Loading..."; sleep 2
+echo -ne '\E[0m'
+clear
+echo -e '\E[40;31m'
+echo "Disclaimer:"
+echo ""
+echo "WARNING! CONTINUE AT YOUR OWN RISK!"; sleep 3
+echo ""
+echo "I have done all I can to make sure this app"
+echo "is safe, it alone cannot damage the iPhone,"
+echo "you can!"
+echo ""
+echo "This is NOT intended for use with the 5.09, 5.9 Bootloader"
+echo ""
+echo ""
+echo "You should ONLY continue if you have"
+echo "the 5.08, 5.8 Bootloader"
+echo -ne '\E[0m'
+echo "Continue?... y or n?"
+read -p ? -n 1 d
+if [[ $d == "N" || $d == "n" ]]; then
+        echo "Aborting..."
+displayMenu
+elif [[ $d == "Y" || $d == "y" ]]; then
+        echo "Continuing..."
+else
+echo "Incorrect response, Please try again."; sleep 3
+displayMenu
+fi
+echo ""
+clear
+echo -e '\E[37;40m'
+echo "Setting Permissions"; sleep 1
+chmod 755 7701
+source 7701
+;;
+"3")
+clear
+echo ""
+echo "Exploit: GeoHot + iPhone Dev Team"
+echo "Patch Implementation: GeoHot"
+echo "Serial number output: Nik S Denin"
+echo "Bash Script: DNA64"
+echo ".fls patched by: DNA64"
+echo ""
+echo "Shoutz to: pH, EvilPengiun, GeoHot,"
+echo "the iPhone Dev Team, and everyone else!"
+echo ""
+echo "twitter me please :)"
+echo "" 
+echo "Press any key to return to the previous menu"
+echo -ne '\E[0m'
+read -s -n 1 a
+if [[ $a == "" || $a == "" ]]; then
+        echo "One moment please..."
+displayMenu
+else
+displayMenu
+fi
+clear
+;;
+"4")
+exit
+;;
+*) echo "\"$CHOICE\" is not a valid choice, please try again."; sleep 2 
+;;
+esac
+done
